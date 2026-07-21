@@ -17,13 +17,6 @@ if verbose:
               f"| Target: {target}")
 ```
 
-Since this trains for 1000 epochs, the full run produces ~5000 lines —
-too long to paste in chat, so it's saved as `single_neuron_full_run_log.txt`
-alongside the updated script. Below is a condensed version plus the
-observations worth knowing for your viva.
-
----
-
 ## Loss at Key Epochs (from an actual run)
 
 | Epoch | Avg Loss |
@@ -91,27 +84,3 @@ past 0 (large positive weights), while the negative bias cancels out the
 case where both inputs are 0.
 
 ---
-
-## Viva-Ready Talking Points
-
-- **Q: Why does loss never hit exactly 0?**
-  Because sigmoid asymptotically approaches 0 and 1 but never reaches them
-  exactly — a finite weighted sum can never produce a perfectly saturated
-  output.
-
-- **Q: Why does this need 1000 epochs vs. the perceptron's 10?**
-  Gradient descent takes proportionally small steps based on the local
-  gradient, so it converges gradually rather than jumping straight to a
-  correct answer. It trades speed for being usable in problems where the
-  perceptron's simple rule doesn't apply (i.e., anything using a smooth,
-  differentiable activation).
-
-- **Q: Why does progress slow down over time?**
-  As predictions get closer to their targets, the error term (and thus
-  the gradient) shrinks, so each update becomes smaller. This is the
-  expected shape of a gradient descent loss curve — steep early, flat
-  later.
-
-- **Q: Could you reduce the number of epochs needed?**
-  Yes, mainly by increasing the learning rate, though too large a value
-  risks overshooting and destabilizing training instead of speeding it up.
